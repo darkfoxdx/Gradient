@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Gradient</string>
+    <string name="hint_color_1">First Color in hex</string>
+    <string name="hint_color_2">Second Color in hex</string>
+</resources>
