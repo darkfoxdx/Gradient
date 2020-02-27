@@ -12,8 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.projecteugene.gradient.databinding.ActivityMainBinding
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.nio.ByteBuffer
 
 
 class MainActivity : AppCompatActivity() {
@@ -74,5 +78,14 @@ class MainActivity : AppCompatActivity() {
         val canvas = Canvas(dstBmp)
         canvas.drawARGB(rgb.a, rgb.redInt, rgb.greenInt, rgb.blueInt)
         return dstBmp
+    }
+
+    private fun gifDrawableToFile(gifDrawable: GifDrawable, gifFile: File) {
+        val byteBuffer = gifDrawable.buffer
+        val output = FileOutputStream(gifFile)
+        val bytes = ByteArray(byteBuffer.capacity())
+        (byteBuffer.duplicate().clear() as ByteBuffer).get(bytes)
+        output.write(bytes, 0, bytes.size)
+        output.close()
     }
 }
